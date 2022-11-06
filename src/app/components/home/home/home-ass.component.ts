@@ -13,11 +13,15 @@ export class HomeComponent implements OnInit {
   bookForm: FormGroup;
 
   slides = [
-    { 'image': '../../../../assets/images/home/imgHome1.jpg' },
-    { 'image': '../../../../assets/images/home/imgHome2.jpg' },
-    { 'image': '../../../../assets/images/home/imgHome3.jpg' },
-    { 'image': '../../../../assets/images/home/imgHome4.jpg' },
-    { 'image': '../../../../assets/images/home/imgHome5.jpg' }
+    { 'image': '../../../../assets/images/home/image1.png' },
+    { 'image': '../../../../assets/images/home/image2.png' },
+    { 'image': '../../../../assets/images/home/image3.png' },
+    { 'image': '../../../../assets/images/home/image4.png' },
+    { 'image': '../../../../assets/images/home/image5.png' },
+    { 'image': '../../../../assets/images/home/image6.png' },
+    { 'image': '../../../../assets/images/home/image7.png' },
+    { 'image': '../../../../assets/images/home/image8.png' },
+    { 'image': '../../../../assets/images/home/image9.png' }
   ];
 
   cards = [

@@ -9,7 +9,8 @@ export class Endpoint {
 export const ENDPOINTS = {
     login: new Endpoint(URL_BASE, "auth/login"),
     register: new Endpoint(URL_BASE, "auth/register"),
-
+    getAllAdvicesFromStudent:new Endpoint(URL_BASE,"advice/get-all-advices"),
+    getAdvicesAvailables:new Endpoint(URL_BASE,"advice/get-advice-schedule"),
     // getAllRooms: new Endpoint(URL_BASE, "room/get-all-rooms"),
     // getAllRoomsBetween: new Endpoint(URL_BASE, "room/get-all-rooms-between"),
     // getRoomDetail: new Endpoint(URL_BASE, "room/get-room-detail/{roomCode}"),

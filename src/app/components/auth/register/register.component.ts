@@ -20,9 +20,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private spinnerService: SpinnerService, private snackBarService: SnackBarService) {
     this.registerForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z- ]{1,63}$',),]),
-      lastName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z- ]{1,63}$',),]),
-      document: new FormControl('', [Validators.required, this.noWhitespaceValidator, Validators.pattern('[0-9]{1,10}$',),]),
+      first_name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z- ]{1,63}$',),]),
+      last_name: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z- ]{1,63}$',),]),
+      id: new FormControl('', [Validators.required, this.noWhitespaceValidator, Validators.pattern('[0-9]{1,10}$',),]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$',),]),
       password: new FormControl('', [Validators.required, Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]),
       repeatPassword: new FormControl('', [Validators.required, Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)]),
@@ -52,8 +52,9 @@ export class RegisterComponent implements OnInit {
       return;
     }
     const user: UserRegister = {
-      fullname: this.registerForm.controls.name.value + " " + this.registerForm.controls.lastName.value,
-      document: this.registerForm.controls.document.value,
+      first_name: this.registerForm.controls.first_name.value,
+      last_name: this.registerForm.controls.last_name.value,
+      id: this.registerForm.controls.id.value,
       email: this.registerForm.controls.email.value,
       password: this.registerForm.controls.password.value
     }

@@ -1,6 +1,7 @@
 export class UserRegister {
-    fullname: string;
-    document: string;
+    first_name: string;
+    last_name: string;
+    id: string;
     email: string;
     password: string;
 }

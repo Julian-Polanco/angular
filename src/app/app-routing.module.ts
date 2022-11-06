@@ -15,6 +15,11 @@ const routes: Routes = [
       .then(m => m.AuthModule)
   },
   {
+    path: 'student',
+    loadChildren: () => import('./components/student/student.module')
+      .then(m => m.StudentModule)
+  },
+  {
     path: 'subjects',
     component: SubjectsComponent
   },

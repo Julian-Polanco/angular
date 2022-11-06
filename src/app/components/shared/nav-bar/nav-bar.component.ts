@@ -2,7 +2,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
-const ADMIN_SUPERADMIN_ROL = [2, 3];
+const ADMIN_SUPERADMIN_ROL = [4];
+const TEACHER_ROL = [2];
+const STUDENT_ROL = [1];
+const SECRETARY_ROL = [3];
 const INVALID_DATA = [null, undefined, "", "null", "undefined"];
 
 @Component({
@@ -28,8 +31,20 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  get isAdminOrSuperadmin(): boolean {
+  get isAdmin(): boolean {
     return ADMIN_SUPERADMIN_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isTeacher(): boolean {
+    return TEACHER_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isStudent(): boolean {
+    return STUDENT_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isSecretary(): boolean {
+    return SECRETARY_ROL.includes(this.authService.isLoginUser().rol);
   }
 
   get isLogin(): boolean {

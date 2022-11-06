@@ -4,38 +4,38 @@
     <div>
       <div class="w-100 mx-auto">
         <mat-form-field class="mt-2 d-block">
-          <input class="w-100" matInput placeholder="Nombres" formControlName="name" type="text">
-          <mat-error *ngIf="!registerForm.get('name')?.errors?.required && (registerForm.get('name')?.errors?.pattern)">
+          <input class="w-100" matInput placeholder="Nombres" formControlName="first_name" type="text">
+          <mat-error *ngIf="!registerForm.get('first_name')?.errors?.required && (registerForm.get('first_name')?.errors?.pattern)">
             Por favor, introduce tu(s) nombre(s) correctamente
           </mat-error>
           <mat-error
-            *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched) && registerForm.get('name')?.errors?.required">
+            *ngIf="registerForm.get('first_name')?.invalid && (registerForm.get('first_name')?.dirty || registerForm.get('first_name')?.touched) && registerForm.get('first_name')?.errors?.required">
             Nombre(s) obligatorio(s)
           </mat-error>
         </mat-form-field>
       </div>
       <div class="w-100 mx-auto">
         <mat-form-field class="mt-2 d-block">
-          <input matInput placeholder="Apellidos" formControlName="lastName" type="text">
+          <input matInput placeholder="Apellidos" formControlName="last_name" type="text">
           <mat-error
-            *ngIf="!registerForm.get('lastName')?.errors?.required && (registerForm.get('lastName')?.errors?.pattern)">
+            *ngIf="!registerForm.get('last_name')?.errors?.required && (registerForm.get('last_name')?.errors?.pattern)">
             Por favor, introduce tu(s) apellido(s) correctamente
           </mat-error>
           <mat-error
-            *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched) && registerForm.get('lastName')?.errors?.required">
+            *ngIf="registerForm.get('last_name')?.invalid && (registerForm.get('last_name')?.dirty || registerForm.get('last_name')?.touched) && registerForm.get('last_name')?.errors?.required">
             Apellido(s) obligatorio(s)
           </mat-error>
         </mat-form-field>
       </div>
       <div class="w-100 mx-auto">
         <mat-form-field class="mt-2 d-block">
-          <input matInput placeholder="Identificación" formControlName="document" type="text" maxlength="10">
+          <input matInput placeholder="Identificación" formControlName="id" type="text" maxlength="10">
           <mat-error
-            *ngIf="!registerForm.get('document')?.errors?.required && (registerForm.get('document')?.errors?.pattern)">
+            *ngIf="!registerForm.get('id')?.errors?.required && (registerForm.get('id')?.errors?.pattern)">
             Por favor, introduce tu número de identificación válido
           </mat-error>
           <mat-error
-            *ngIf="registerForm.get('document')?.invalid && (registerForm.get('document')?.dirty || registerForm.get('document')?.touched) && registerForm.get('document')?.errors?.required">
+            *ngIf="registerForm.get('id')?.invalid && (registerForm.get('id')?.dirty || registerForm.get('id')?.touched) && registerForm.get('id')?.errors?.required">
             Identificación es obligatoria
           </mat-error>
         </mat-form-field>
