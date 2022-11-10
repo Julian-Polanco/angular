@@ -64,7 +64,7 @@ export class ListAdvicesComponent implements OnInit {
     }
   }
 
-  editUser(id: number, userId: number): void {
+  editUser(id: number): void {
     const dialogRef = this.dialog.open(SetAdviceComponent, {
       data: {
         id: id

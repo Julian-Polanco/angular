@@ -24,40 +24,40 @@ export class SetAdviceComponent implements OnInit {
     private snack: SnackBarService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.formTime = new FormGroup({
-      fullname: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$',),]),
+      name : new FormControl('', [Validators.required]),
+      //fullname: new FormControl('', [Validators.required]),
+      //email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$',),]),
     })
   }
 
   ngOnInit(): void {
     const spinner = this.spinner.start("Cargando horarios...");
-    const map = new Map();
-    map.set("id_advice", this.data.id);
-    this.httpClient.post(ENDPOINTS.getAdvicesAvailables, map).subscribe((result: any) => {
+    const user = {
+      id_advice: this.data.id
+    };
+    this.httpClient.post(ENDPOINTS.getAdvicesAvailables, user).subscribe((result: any) => {
+      console.log(result);
       if (result.status == 200) {
         this.lista = result.data;
-        this.formTime.controls.fullname.setValue(result.data.fullname);
-        this.formTime.controls.email.setValue(result.data.email);
       }
       this.spinner.stop(spinner);
     });
   }
 
   editUser(): void {
-    const spinner = this.spinner.start("Actualizando usuario...");
-    const user = {
-      id: this.data.userId,
-      fullname: this.formTime.controls.fullname.value,
-      email: this.formTime.controls.email.value
-    }
-    this.httpClient.post(ENDPOINTS.getAllAdvicesFromStudent, user).subscribe((result: any) => {
-      if(result.status == 200) {
-        this.snack.openSnackBar("Actualizado con éxito!");
-      }
-      this.closeModal = true;
-      this.spinner.stop(spinner);
-    });
+    //const spinner = this.spinner.start("Actualizando usuario...");
+    //const user = {
+    //  id: this.data.userId,
+    //  fullname: this.formTime.controls.fullname.value,
+    //  email: this.formTime.controls.email.value
+    //}
+    //this.httpClient.post(ENDPOINTS.getAllAdvicesFromStudent, user).subscribe((result: any) => {
+    //  if(result.status == 200) {
+    //    this.snack.openSnackBar("Actualizado con éxito!");
+    //  }
+    //  this.closeModal = true;
+    //  this.spinner.stop(spinner);
+    //});
   }
-
 
 }

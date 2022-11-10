@@ -3,7 +3,7 @@
   <mat-dialog-content [formGroup]="formTime">
     <mat-form-field appearance="fill">
       <mat-label>Hora</mat-label>
-      <mat-select formControlName="Time">
+      <mat-select name="Time">
         <mat-option [value]="item" *ngFor="let item of lista">{{item}}</mat-option>
       </mat-select>
     </mat-form-field>
