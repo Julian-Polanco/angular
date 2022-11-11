@@ -7,5 +7,7 @@
   <button *ngIf="isLogin && isAdmin" mat-button [routerLink]="['/admin/manage-guests']">Gestionar huéspedes</button> <!-- Para el rol administrador -->
   <button *ngIf="!isLogin" mat-button [routerLink]="['/auth/login']">Iniciar Sesión</button>
   <button *ngIf="!isLogin" mat-raised-button [routerLink]="['/auth/register']">Registrarse</button>
+  <button *ngIf="isLogin" mat-button >{{nameAndId[0]}}</button>
   <button *ngIf="isLogin" mat-button (click)="closeSession()">Cerrar Sesión</button>
 </mat-toolbar>
+

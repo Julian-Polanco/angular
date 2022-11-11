@@ -7,6 +7,7 @@ const TEACHER_ROL = [2];
 const STUDENT_ROL = [1];
 const SECRETARY_ROL = [3];
 const INVALID_DATA = [null, undefined, "", "null", "undefined"];
+const USER: string[] = ["", ""]
 
 @Component({
   selector: 'app-nav-bar',
@@ -51,4 +52,9 @@ export class NavBarComponent implements OnInit {
     return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
   }
 
+  get nameAndId(): string[] {
+    USER[0] = this.authService.isLoginUser().name;
+    USER[1] = String(this.authService.isLoginUser().id);
+    return USER;
+  }
 }

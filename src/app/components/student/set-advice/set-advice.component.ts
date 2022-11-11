@@ -5,6 +5,13 @@ import { ENDPOINTS } from 'src/app/config/endpoints';
 import { HttpClientService } from 'src/app/services/http-client/http-client.service';
 import { SnackBarService } from 'src/app/services/snack-bar/snack-bar.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+
+const ADMIN_SUPERADMIN_ROL = [4];
+const STUDENT_ROL = [1];
+const INVALID_DATA = [null, undefined, "", "null", "undefined"];
+const USER: any[] = ["", ""]
+let ID_ADVICE: number = 0;
 
 @Component({
   selector: 'app-set-advice',
@@ -13,20 +20,17 @@ import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 })
 export class SetAdviceComponent implements OnInit {
 
-  lista:string[]=["hola","que","tal", "estas"];
-  seleccionado:string[]=[];
+  lista: string[] = [];
 
 
   formTime: FormGroup;
   closeModal: boolean = false;
-
+  selected: string = "";
   constructor(private httpClient: HttpClientService, private spinner: SpinnerService,
     private snack: SnackBarService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService) {
     this.formTime = new FormGroup({
-      name : new FormControl('', [Validators.required]),
-      //fullname: new FormControl('', [Validators.required]),
-      //email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$',),]),
+      Time: new FormControl('', [Validators.required , Validators.pattern("^(?!No hay horas disponibles$).*$")])
     })
   }
 
@@ -35,8 +39,8 @@ export class SetAdviceComponent implements OnInit {
     const user = {
       id_advice: this.data.id
     };
+    ID_ADVICE = this.data.id;
     this.httpClient.post(ENDPOINTS.getAdvicesAvailables, user).subscribe((result: any) => {
-      console.log(result);
       if (result.status == 200) {
         this.lista = result.data;
       }
@@ -44,20 +48,39 @@ export class SetAdviceComponent implements OnInit {
     });
   }
 
-  editUser(): void {
-    //const spinner = this.spinner.start("Actualizando usuario...");
-    //const user = {
-    //  id: this.data.userId,
-    //  fullname: this.formTime.controls.fullname.value,
-    //  email: this.formTime.controls.email.value
-    //}
-    //this.httpClient.post(ENDPOINTS.getAllAdvicesFromStudent, user).subscribe((result: any) => {
-    //  if(result.status == 200) {
-    //    this.snack.openSnackBar("Actualizado con éxito!");
-    //  }
-    //  this.closeModal = true;
-    //  this.spinner.stop(spinner);
-    //});
+  setAdvice(): void {
+    const spinner = this.spinner.start("Apartando Asesoria...");
+    const advice = {
+      id_advice: ID_ADVICE,
+      id_student: this.nameAndId[1],
+      time_advice: this.selected
+    }
+    this.httpClient.post(ENDPOINTS.setAdvice, advice).subscribe((result: any) => {
+      if (result.status == 200) {
+        this.snack.openSnackBar("Apartada con éxito!");
+      } else {
+        this.snack.openSnackBar("Error!!");
+      }
+      this.closeModal = true;
+      this.spinner.stop(spinner);
+    });
   }
 
+  get isAdmin(): boolean {
+    return ADMIN_SUPERADMIN_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isStudent(): boolean {
+    return STUDENT_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isLogin(): boolean {
+    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
+  }
+
+  get nameAndId(): string[] {
+    USER[0] = this.authService.isLoginUser().name;
+    USER[1] = String(this.authService.isLoginUser().id);
+    return USER;
+  }
 }
