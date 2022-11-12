@@ -1,5 +1,4 @@
 import { RouterModule, Routes } from '@angular/router';
-//import { AuthIsLoginGuard } from 'src/guards/auth-is-login.guard';
 import { HomeComponent } from './components/home/home/home-ass.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 
@@ -18,6 +17,16 @@ const routes: Routes = [
     path: 'student',
     loadChildren: () => import('./components/student/student.module')
       .then(m => m.StudentModule)
+  },
+  {
+    path: 'teacher',
+    loadChildren: () => import('./components/teacher/teacher.module')
+      .then(m => m.TeacherModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./components/admin/admin.module')
+      .then(m => m.AdminModule)
   },
   {
     path: 'subjects',

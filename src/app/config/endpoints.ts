@@ -13,6 +13,8 @@ export const ENDPOINTS = {
     getAllAdvicesFromStudent:new Endpoint(URL_BASE,"advice/get-all-advices"),
     getAdvicesAvailables:new Endpoint(URL_BASE,"advice/get-advice-schedule"),
     setAdvice:new Endpoint(URL_BASE,"advice/set-advice"),
+    getSubjects:new Endpoint(URL_BASE,"subject/get-subjects"),
+    addAvice:new Endpoint(URL_BASE,"advice/add-advice"),
     // getAllRooms: new Endpoint(URL_BASE, "room/get-all-rooms"),
     // getAllRoomsBetween: new Endpoint(URL_BASE, "room/get-all-rooms-between"),
     // getRoomDetail: new Endpoint(URL_BASE, "room/get-room-detail/{roomCode}"),

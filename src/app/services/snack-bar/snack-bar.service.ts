@@ -22,5 +22,7 @@ export class SnackBarService {
   openSnackBar(text: string) {
     this._snackBar.open(text, 'Ok', this.matSnackBarConfig);
   }
-
+  openSnackBar2(text: string, action: string) {
+    this._snackBar.open(text, action, this.matSnackBarConfig);
+  }
 }

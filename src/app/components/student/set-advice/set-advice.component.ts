@@ -6,6 +6,7 @@ import { HttpClientService } from 'src/app/services/http-client/http-client.serv
 import { SnackBarService } from 'src/app/services/snack-bar/snack-bar.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Subjects } from 'src/app/models/subjects';
 
 const ADMIN_SUPERADMIN_ROL = [4];
 const STUDENT_ROL = [1];

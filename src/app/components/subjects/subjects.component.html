@@ -1,29 +1,10 @@
 <main>
-  <h1>
+  <h1 class="text-center my-5">
     Materias que podras ver en esta pagina!!
   </h1>
-  <div class="container">
-    <h1>Matematicas</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus sint aspernatur optio id blanditiis, aperiam
-      odit quibusdam unde praesentium quae. Placeat minima sapiente perferendis magnam quasi repudiandae sequi esse
-      ducimus.</p>
-  </div>
-  <div class="container">
-    <h1>Estadistica</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus sint aspernatur optio id blanditiis, aperiam
-      odit quibusdam unde praesentium quae. Placeat minima sapiente perferendis magnam quasi repudiandae sequi esse
-      ducimus.</p>
-  </div>
-  <div class="container">
-    <h1>Biologia</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus sint aspernatur optio id blanditiis, aperiam
-      odit quibusdam unde praesentium quae. Placeat minima sapiente perferendis magnam quasi repudiandae sequi esse
-      ducimus.</p>
-  </div>
-  <div class="container">
-    <h1>Ciencias Sociales</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus sint aspernatur optio id blanditiis, aperiam
-      odit quibusdam unde praesentium quae. Placeat minima sapiente perferendis magnam quasi repudiandae sequi esse
-      ducimus.</p>
-  </div>
+
+    <div *ngFor="let subject of subjects" class="container">
+      <h1>{{subject.name}}</h1>
+      <p>{{subject.description}}</p>
+    </div>
 </main>
