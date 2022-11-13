@@ -5,13 +5,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ChangeRolComponent } from './change-rol/change-rol.component';
+import { ListUsersComponent } from './list-users/list-users.component';
+import { MatTableModule } from '@angular/material/table';
 
+import { HttpClientModule } from '@angular/common/http';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ChangeRolComponent } from './change-rol/change-rol.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [
-ChangeRolComponent
+    ListUsersComponent,
+    ChangeRolComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +29,12 @@ ChangeRolComponent
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatTableModule,
+    HttpClientModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatDialogModule
   ]
 })
 export class AdminModule { }

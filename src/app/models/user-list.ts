@@ -1,7 +1,6 @@
 export class UserList {
-    id: string;
-    document: string;
-    fullName: string;
-    email: string;
-    role: string;
+    id?: string;
+    full_name?: string;
+    email?: string;
+    role?: string;
 }

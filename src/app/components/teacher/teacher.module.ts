@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CreateAdviceComponent } from './create-advice/create-advice.component';
 import { ListAdvicesComponent } from './list-advices/list-advices.component';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     CreateAdviceComponent,
@@ -22,6 +23,7 @@ import { ListAdvicesComponent } from './list-advices/list-advices.component';
     FormsModule,
     MatDatepickerModule,
     MatTableModule,
+    MatIconModule,
     TeacherRoutingModule,
     MatFormFieldModule,
     MatInputModule,

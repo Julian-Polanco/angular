@@ -26,7 +26,7 @@ export class ListAdvicesComponent implements OnInit {
   @ViewChild(MatTable)
   dataSource!: MatTable<Advice>;
 
-  columnas: string[] = ['id','teacherName', 'topic', 'date', 'start_time','end_time','Attendance'];
+  columnas: string[] = ['id', 'teacherName', 'topic', 'date', 'start_time', 'end_time', 'Attendance'];
 
   datos: Advice[] = [];
 
@@ -62,12 +62,11 @@ export class ListAdvicesComponent implements OnInit {
     }
   }
 
-  editUser(id: number): void {
+  setAdvice(id: number): void {
     const dialogRef = this.dialog.open(SetAdviceComponent, {
       data: {
         id: id
       }
     });
-
-}
+  }
 }

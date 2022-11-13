@@ -6,7 +6,6 @@ import { HttpClientService } from 'src/app/services/http-client/http-client.serv
 import { SnackBarService } from 'src/app/services/snack-bar/snack-bar.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Subjects } from 'src/app/models/subjects';
 
 const ADMIN_SUPERADMIN_ROL = [4];
 const STUDENT_ROL = [1];
@@ -37,11 +36,11 @@ export class SetAdviceComponent implements OnInit {
 
   ngOnInit(): void {
     const spinner = this.spinner.start("Cargando horarios...");
-    const user = {
+    const advice = {
       id_advice: this.data.id
     };
     ID_ADVICE = this.data.id;
-    this.httpClient.post(ENDPOINTS.getAdvicesAvailables, user).subscribe((result: any) => {
+    this.httpClient.post(ENDPOINTS.getAdvicesAvailables, advice).subscribe((result: any) => {
       if (result.status == 200) {
         this.lista = result.data;
       }

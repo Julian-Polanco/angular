@@ -2,7 +2,7 @@
   <button mat-button [routerLink]="['/']"><span><mat-icon>library_books</mat-icon>AdviCation</span></button>
   <button mat-button [routerLink]="['/subjects']">Materias</button>
   <button *ngIf="isLogin && isStudent || isAdmin" mat-button [routerLink]="['student/list-advices']">Separar Asesoria</button>
-  <button *ngIf="isLogin && isAdmin" mat-button [routerLink]="['/admin/change-rol']">Gestionar Usuarios</button> <!-- Para el rol administrador -->
+  <button *ngIf="isLogin && isAdmin" mat-button [routerLink]="['/admin/list-users']">Gestionar Usuarios</button> <!-- Para el rol administrador -->
   <button *ngIf="isLogin && isTeacher || isAdmin" mat-button [routerLink]="['/teacher/create-advice']">Crear Asesoria</button> <!-- Para el rol administrador -->
   <button *ngIf="isLogin && isTeacher || isAdmin" mat-button [routerLink]="['/teacher/list-advices']">Asesorias Creadas por mi</button> <!-- Para el rol administrador -->
   <div class="spacer"></div>
