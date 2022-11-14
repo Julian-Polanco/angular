@@ -2,7 +2,6 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const HOST = "https://mintic-nrc1873-g15-hotel-back.herokuapp.com";
 const HOST_LOCAL = "http://localhost:5000";
 
 export const environment = {

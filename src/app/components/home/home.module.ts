@@ -24,9 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     SharedModule,
     HomeRoutingModule,
-    //Material carousel
     MatCarouselModule.forRoot(),
-    //Angular Material
     MatCardModule,
     MatDatepickerModule,
     MatFormFieldModule,

@@ -29,6 +29,11 @@ const routes: Routes = [
       .then(m => m.AdminModule)
   },
   {
+    path: 'secretary',
+    loadChildren: () => import('./components/secretary/secretary.module')
+      .then(m => m.SecretaryModule)
+  },
+  {
     path: 'subjects',
     component: SubjectsComponent
   },

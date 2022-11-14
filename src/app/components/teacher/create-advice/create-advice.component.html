@@ -7,21 +7,12 @@
       <input formControlName="topic" class="w-100" matInput required>
     </mat-form-field>
 
-    <mat-form-field class="w-100 d-block" appearance="fill" >
+    <mat-form-field class="w-100 d-block" appearance="fill">
       <mat-label>Ingresa la descripción de la asesoria</mat-label>
       <textarea formControlName="description" matInput required></textarea>
     </mat-form-field>
-<!--
+
     <div class="row">
-      <mat-form-field appearance="fill" class="w-50 d-block col">
-        <mat-label>Materia</mat-label>
-        <mat-select name="id_subject" [(value)]="selected" formControlName="id_subject" required>
-          <mat-option [value]="item.id" *ngFor="let item of lista">{{item.name}}</mat-option>
-        </mat-select>
-      </mat-form-field> -->
-
-
-      <div class="row">
       <mat-form-field appearance="fill" class="w-50 d-block col">
         <mat-label>Materia</mat-label>
         <mat-select name="id_subject" [(value)]="selected" formControlName="id_subject" required>
@@ -32,27 +23,27 @@
 
       <mat-form-field appearance="fill" class="w-50 d-block col">
         <mat-label>Choose a date</mat-label>
-        <input  matInput [matDatepicker]="picker" formControlName="date">
+        <input matInput [matDatepicker]="picker" formControlName="date">
         <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
     </div>
     <div class="row">
-    <mat-form-field appearance="fill" class="w-50 d-block col">
-      <mat-label>Inicio</mat-label>
-      <mat-select name="start_time" [(value)]="start_time" formControlName="start_time" required>
-        <mat-option [value]="item" *ngFor="let item of horas">{{item}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field appearance="fill" class="w-50 d-block col">
+        <mat-label>Inicio</mat-label>
+        <mat-select name="start_time" [(value)]="start_time" formControlName="start_time" required>
+          <mat-option [value]="item" *ngFor="let item of horas">{{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" class="w-50 d-block col">
-      <mat-label>Fin</mat-label>
-      <mat-select name="end_time" [(value)]="end_time" formControlName="end_time" required>
-        <mat-option [value]="item" *ngFor="let item of horas">{{item}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field appearance="fill" class="w-50 d-block col">
+        <mat-label>Fin</mat-label>
+        <mat-select name="end_time" [(value)]="end_time" formControlName="end_time" required>
+          <mat-option [value]="item" *ngFor="let item of horas">{{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <button [disabled]="!adviceForm.valid" mat-raised-button color="primary" mat-button>Crear</button>
   </form>

@@ -16,7 +16,6 @@ const INVALID_DATA = [null, undefined, "", "null", "undefined"];
   styleUrls: ['./subjects.component.css']
 })
 export class SubjectsComponent implements OnInit {
-  //datos: Advice[] = [];
 
   subjects: Subjects[] = [];
   dataUser: UserLoginSucess;

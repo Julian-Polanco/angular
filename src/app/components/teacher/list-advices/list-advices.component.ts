@@ -1,5 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENDPOINTS } from 'src/app/config/endpoints';
 import { Advice } from 'src/app/models/advice';
@@ -12,7 +11,12 @@ import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatTable } from '@angular/material/table';
 import { SnackBarService } from 'src/app/services/snack-bar/snack-bar.service';
+import { Router } from '@angular/router';
 
+const ADMIN_ROL = [4];
+const TEACHER_ROL = [2];
+const STUDENT_ROL = [1];
+const SECRETARY_ROL = [3];
 const INVALID_DATA = [null, undefined, "", "null", "undefined"];
 
 @Component({
@@ -41,15 +45,16 @@ export class ListAdvicesComponent implements OnInit {
   dataUser: UserLoginSucess;
 
   constructor(private httpClient: HttpClientService, private spinner: SpinnerService,
-    private authService: AuthService, private dialog: MatDialog, private snackBarService: SnackBarService) { }
+    private authService: AuthService, private dialog: MatDialog, private snackBarService: SnackBarService,private router: Router) { }
 
   ngOnInit(): void {
-    this.loadDataUser();
-    this.loadData();
-  }
+    if (!this.isTeacher && !this.isAdmin) {
+      this.router.navigate(['/']);
+    } else {
+      this.loadDataUser();
+      this.loadData();
+    }
 
-  get isLogin(): boolean {
-    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
   }
 
   loadDataUser(): void {
@@ -89,5 +94,25 @@ export class ListAdvicesComponent implements OnInit {
           this.spinner.stop(spinner);
         });
     }
+  }
+
+  get isAdmin(): boolean {
+    return ADMIN_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isTeacher(): boolean {
+    return TEACHER_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isStudent(): boolean {
+    return STUDENT_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isSecretary(): boolean {
+    return SECRETARY_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isLogin(): boolean {
+    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
   }
 }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ENDPOINTS } from 'src/app/config/endpoints';
 import { ResponseService } from 'src/app/models/response-service';
 import { UserList } from 'src/app/models/user-list';
@@ -12,6 +13,10 @@ import { HttpClientService } from 'src/app/services/http-client/http-client.serv
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { ChangeRolComponent } from '../change-rol/change-rol.component';
 
+const ADMIN_ROL = [4];
+const TEACHER_ROL = [2];
+const STUDENT_ROL = [1];
+const SECRETARY_ROL = [3];
 const INVALID_DATA = [null, undefined, "", "null", "undefined"];
 
 @Component({
@@ -20,8 +25,6 @@ const INVALID_DATA = [null, undefined, "", "null", "undefined"];
   styleUrls: ['./list-users.component.css']
 })
 export class ListUsersComponent implements OnInit {
-  //dataSource: UserList[] = [];
-
 
   dataSource: MatTableDataSource<UserList>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,14 +32,19 @@ export class ListUsersComponent implements OnInit {
 
   displayedColumns= ['id', 'full_name', 'email', 'role', 'actions'];
   constructor(private spinner: SpinnerService,private httpClient: HttpClientService,
-    private authService: AuthService,private dialog: MatDialog) { }
+    private authService: AuthService,private dialog: MatDialog,private router: Router) { }
 
   dataUser: UserLoginSucess;
 
 
   ngOnInit(): void {
-    this.loadDataUser();
-    this.loadData();
+    if (!this.isAdmin){
+      this.router.navigate(['/']);
+    }else{
+      this.loadDataUser();
+      this.loadData();
+    }
+
   }
 
   changeRol(id: number): void {
@@ -73,15 +81,30 @@ export class ListUsersComponent implements OnInit {
     }
   }
 
-  get isLogin(): boolean {
-    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
-  }
-
   loadDataUser(): void {
     if (this.isLogin) {
       this.dataUser = this.authService.isLoginUser();
     }
   }
 
+  get isAdmin(): boolean {
+    return ADMIN_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isTeacher(): boolean {
+    return TEACHER_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isStudent(): boolean {
+    return STUDENT_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isSecretary(): boolean {
+    return SECRETARY_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isLogin(): boolean {
+    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
+  }
 
 }

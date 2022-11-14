@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatCarousel, MatCarouselComponent } from 'ng-mat-carousel';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-ass',

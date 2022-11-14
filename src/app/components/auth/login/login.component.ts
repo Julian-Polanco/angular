@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserLogin } from 'src/app/models/user-login';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
-
+const INVALID_DATA = [null, undefined, "", "null", "undefined"];
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginForm.valueChanges.subscribe(() => this.sessionOk = 0);
+    if (this.isLogin) {
+      this.router.navigate(['/']);
+    }else{
+      this.loginForm.valueChanges.subscribe(() => this.sessionOk = 0);
+    }
   }
 
   onSubmit() {
@@ -55,6 +59,10 @@ export class LoginComponent implements OnInit {
         this.sessionOk = 2;
       }
     });
+  }
+
+  get isLogin(): boolean {
+    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
   }
 
 }

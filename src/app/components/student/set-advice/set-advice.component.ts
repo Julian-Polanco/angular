@@ -6,6 +6,7 @@ import { HttpClientService } from 'src/app/services/http-client/http-client.serv
 import { SnackBarService } from 'src/app/services/snack-bar/snack-bar.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 const ADMIN_SUPERADMIN_ROL = [4];
 const STUDENT_ROL = [1];
@@ -27,7 +28,7 @@ export class SetAdviceComponent implements OnInit {
   closeModal: boolean = false;
   selected: string = "";
   constructor(private httpClient: HttpClientService, private spinner: SpinnerService,
-    private snack: SnackBarService,
+    private snack: SnackBarService,private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService) {
     this.formTime = new FormGroup({
       Time: new FormControl('', [Validators.required , Validators.pattern("^(?!No hay horas disponibles$).*$")])
@@ -35,17 +36,24 @@ export class SetAdviceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const spinner = this.spinner.start("Cargando horarios...");
-    const advice = {
-      id_advice: this.data.id
-    };
-    ID_ADVICE = this.data.id;
-    this.httpClient.post(ENDPOINTS.getAdvicesAvailables, advice).subscribe((result: any) => {
-      if (result.status == 200) {
-        this.lista = result.data;
-      }
-      this.spinner.stop(spinner);
-    });
+
+    if (!this.isLogin && !this.isStudent && !this.isAdmin) {
+      this.router.navigate(['/']);
+    } else {
+      const spinner = this.spinner.start("Cargando horarios...");
+      const advice = {
+        id_advice: this.data.id
+      };
+      ID_ADVICE = this.data.id;
+      this.httpClient.post(ENDPOINTS.getAdvicesAvailables, advice).subscribe((result: any) => {
+        if (result.status == 200) {
+          this.lista = result.data;
+        }
+        this.spinner.stop(spinner);
+      });
+    }
+
+
   }
 
   setAdvice(): void {

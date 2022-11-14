@@ -35,7 +35,6 @@
     <td mat-cell *matCellDef="let advice"> {{advice.end_time}} </td>
   </ng-container>
 
-
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
     <td mat-cell *matCellDef="let element; let value = index;">
@@ -44,21 +43,44 @@
         <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
         <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
       </button>
-      <button mat-raised-button color="primary" (click)="setAdvice(element.id)" focusable="false">
-        Asistir
-      </button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let advice" [attr.colspan]="columnsToDisplayWithExpand.length">
-      <div class="example-element-detail" [@detailExpand]="advice == expandedElement ? 'expanded' : 'collapsed'">
-        <div class="example-element-description">
+      <div class="example-element-detail row" [@detailExpand]="advice == expandedElement ? 'expanded' : 'collapsed'">
+        <div class="example-element-description row d-block">
           <h4>Descripción</h4>
           {{advice.description}}
         </div>
+        <h4 class="d-block">Estudiantes que asistieron</h4>
+        <div class="example-element-description d-block w-100">
+          <table mat-table [dataSource]="advice.students" multiTemplateDataRows
+            class="mat-elevation-z8 bg-white border-dark" #tabla2>
+
+            <ng-container matColumnDef="id">
+              <th class="black border-dark" mat-header-cell *matHeaderCellDef> identificación </th>
+              <td class="black border-dark" mat-cell *matCellDef="let advice"> {{advice.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="full_name">
+              <th class="black border-dark" mat-header-cell *matHeaderCellDef> Nombre completo </th>
+              <td class="black border-dark" mat-cell *matCellDef="let advice"> {{advice.full_name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th class="black border-dark" mat-header-cell *matHeaderCellDef> email </th>
+              <td class="black border-dark" mat-cell *matCellDef="let advice"> {{advice.email}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnas2"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnas2;"></tr>
+            
+          </table>
+        </div>
       </div>
     </td>
+
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columnas"></tr>

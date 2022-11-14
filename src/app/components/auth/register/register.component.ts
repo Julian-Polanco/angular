@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { SnackBarService } from 'src/app/services/snack-bar/snack-bar.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
+const INVALID_DATA = [null, undefined, "", "null", "undefined"];
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -31,6 +32,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isLogin) {
+      this.router.navigate(['/']);
+    }
   }
 
   noWhitespaceValidator(control: FormControl) {
@@ -69,4 +73,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  get isLogin(): boolean {
+    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
+  }
 }

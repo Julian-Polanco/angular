@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateAdvice } from 'src/app/models/create-advice';
 import { MyErrorStateMatcher } from 'src/app/providers/custom-validators';
@@ -13,7 +13,10 @@ import { ENDPOINTS } from 'src/app/config/endpoints';
 import { ResponseService } from 'src/app/models/response-service';
 
 
-
+const ADMIN_ROL = [4];
+const TEACHER_ROL = [2];
+const STUDENT_ROL = [1];
+const SECRETARY_ROL = [3];
 const INVALID_DATA = [null, undefined, "", "null", "undefined"];
 @Component({
   selector: 'app-create-advice',
@@ -52,7 +55,7 @@ export class CreateAdviceComponent implements OnInit {
   ];
 
   selected: number = 0;
-  start_time:string="";
+  start_time: string = "";
   end_time: string = "";
 
   adviceForm: FormGroup;
@@ -66,16 +69,19 @@ export class CreateAdviceComponent implements OnInit {
       topic: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       id_subject: new FormControl('', [Validators.required]),
-      date: new FormControl('',[Validators.required]),
+      date: new FormControl('', [Validators.required]),
       start_time: new FormControl('', [Validators.required]),
       end_time: new FormControl('', [Validators.required]),
     });
   }
 
   ngOnInit(): void {
-    this.loadDataUser();
-    this.loadData();
-
+    if (!this.isTeacher && !this.isAdmin ) {
+      this.router.navigate(['/']);
+    } else {
+      this.loadDataUser();
+      this.loadData();
+    }
   }
 
 
@@ -89,7 +95,7 @@ export class CreateAdviceComponent implements OnInit {
         this.spinnerService.stop(spinner);
       });
   }
-  print(){
+  print() {
     console.log(this.adviceForm.controls.date.value.toISOString().split('T')[0]);
   }
 
@@ -111,35 +117,43 @@ export class CreateAdviceComponent implements OnInit {
     }
 
     this.httpClient.post(ENDPOINTS.addAvice, advice).subscribe(
-      (response:any) => {
+      (response: any) => {
         if (response.status == 200) {
           this.snackBarService.openSnackBar2("Se ha creado la asesoría correctamente", "Aceptar");
         }
         else {
           this.snackBarService.openSnackBar2("Ha ocurrido un error al registrar la asesoría", "Aceptar");
-
         }
         this.spinnerService.stop(spinnerRef);
-    });
-
-    // this.authService.register(user).subscribe((data) => {
-    //   this.spinnerService.stop(spinnerRef);
-    //   if (data.status == 200) {
-    //     this.snackBarService.openSnackBar("Registro exitoso!!!");
-    //     this.router.navigate(['/auth/login']);
-    //   }
-    // }, (_) => {
-    //   this.spinnerService.stop(spinnerRef);
-    // });
+      });
   }
 
-  get isLogin(): boolean {
-    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
-  }
 
   loadDataUser(): void {
     if (this.isLogin) {
       this.dataUser = this.authService.isLoginUser();
     }
   }
+
+
+  get isAdmin(): boolean {
+    return ADMIN_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isTeacher(): boolean {
+    return TEACHER_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isStudent(): boolean {
+    return STUDENT_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isSecretary(): boolean {
+    return SECRETARY_ROL.includes(this.authService.isLoginUser().rol);
+  }
+
+  get isLogin(): boolean {
+    return !INVALID_DATA.includes(String(this.authService.isLoginUser()));
+  }
+
 }
